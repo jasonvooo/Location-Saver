@@ -9,7 +9,7 @@ class SaveMenu : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        let test = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Save",colour: 0x34aadc,radius: 5)
+        let test = createButton(screenSize.width/2-150,height: screenSize.height - 65,x: 300,y: 50,title: "Save",colour: 0x4CD964,radius: 5)
         test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(test)
         
