@@ -1,12 +1,24 @@
 import UIKit
+import CoreData
 
 class SavedData: UIViewController{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
-
+    var name = String()
+    
+    convenience init( name:  String) {
+        self.init()
+        self.name = name
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+        let label = UILabel(frame:CGRectMake(100,100,100,100))
+        label.text = name
+        self.view.addSubview(label)
         
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
         nav.backgroundColor = UIColor.whiteColor()

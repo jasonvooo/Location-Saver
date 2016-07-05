@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
@@ -6,10 +7,24 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     let shift = UIApplication.sharedApplication().statusBarFrame.size.height
     
     var tableView: UITableView  =   UITableView()
-    let animals : [String] = ["1","2","3"]
+    var locations = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            locations = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
         self.view.backgroundColor = UIColor.whiteColor()
 
         tableView = UITableView(frame: CGRectMake(0, shift+44, screenSize.width-15, screenSize.height-shift-44), style: UITableViewStyle.Plain)
@@ -37,7 +52,7 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return animals.count
+        return locations.count
         
     }
     
@@ -45,14 +60,16 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     {
         
         let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
-        cell.textLabel!.text = animals [indexPath.row]
+        let location = locations[indexPath.row] as NSManagedObject
+        cell.textLabel!.text =  location.valueForKey("name") as? String
         return cell;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        print(animals[indexPath.row])
-        
+        let location = locations[indexPath.row] as NSManagedObject
+        let savedData:SavedData = SavedData(name: (location.valueForKey("name") as? String)!)
+        self.presentViewController(savedData, animated: true, completion: nil)        
     }
     
     func backMain() {
