@@ -15,13 +15,7 @@ class ViewController: UIViewController {
         loadButton.addTarget(self, action: #selector(ViewController.displayLoadMenu), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(loadButton)
 
-        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
-, width: screenSize.width, height: screenSize.height/10))
-        self.view.addSubview(navBar);
-        let navItem = UINavigationItem(title: "Location Saver");
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: nil, action: #selector(ViewController.viewDidLoad));
-        navItem.rightBarButtonItem = doneItem;
-        navBar.setItems([navItem], animated: false);
+        
     }
     
     func cancel() {

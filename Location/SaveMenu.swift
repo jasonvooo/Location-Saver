@@ -7,21 +7,18 @@ class SaveMenu : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        let test = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Test",colour: 0x34aadc,radius: 5)
+        let test = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Save",colour: 0x34aadc,radius: 5)
         test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(test)
-        /*
-        let back = createButton(screenSize.width/8-20, height: screenSize.height/20, x: 30, y: 20, title: "Back", colour: 0x34aadc, radius: 5)
-        test.addTarget(self, action: #selector(SaveMenu.backMain), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(back)
-         */
+     
         
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
-            , width: screenSize.width, height: screenSize.height/10))
+            , width: screenSize.width, height: 44))
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
         self.view.addSubview(navBar);
         let navItem = UINavigationItem(title: "Location Saver");
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: nil, action: #selector(ViewController.viewDidLoad));
-        navItem.rightBarButtonItem = doneItem;
+        let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:nil)
+        navItem.leftBarButtonItem = backItem;
         navBar.setItems([navItem], animated: false);
 
     }
