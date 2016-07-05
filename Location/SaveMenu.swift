@@ -10,7 +10,7 @@ class SaveMenu : UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         let test = createButton(screenSize.width/2-150,height: screenSize.height - 65,x: 300,y: 50,title: "Save",colour: 0x4CD964,radius: 5)
-        test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
+        test.addTarget(self, action: #selector(SaveMenu.displaySaveOption), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(test)
         
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
@@ -44,6 +44,11 @@ class SaveMenu : UIViewController{
         button.setTitle(title, forState: UIControlState.Normal)
         button.layer.cornerRadius = radius
         return button
+    }
+    
+    func displaySaveOption(){
+        let saveOption:SaveOption = SaveOption()
+        self.presentViewController(saveOption, animated: true, completion: nil)
     }
     
     func saveLocation() {
