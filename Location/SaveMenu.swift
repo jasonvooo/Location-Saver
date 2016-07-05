@@ -13,13 +13,19 @@ class SaveMenu : UIViewController{
         test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(test)
         
+        let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
+        nav.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(nav)
+        
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
             , width: screenSize.width, height: 44))
         self.view.addSubview(navBar);
         let navItem = UINavigationItem(title: "Location Saver");
-        let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:nil)
+        let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:#selector(SaveMenu.backMain))
         navItem.leftBarButtonItem = backItem;
         navBar.setItems([navItem], animated: false);
+        
+        
 
     }
     //UI colour from hex
@@ -47,7 +53,7 @@ class SaveMenu : UIViewController{
     }
     
     func backMain() {
-        
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
