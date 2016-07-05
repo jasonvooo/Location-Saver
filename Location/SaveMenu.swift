@@ -14,7 +14,7 @@ class SaveMenu : UIViewController{
         self.view.addSubview(test)
         
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
-            , width: screenSize.width, height: 20))
+            , width: screenSize.width, height: 44))
         self.view.addSubview(navBar);
         let navItem = UINavigationItem(title: "Location Saver");
         let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:nil)
@@ -47,6 +47,7 @@ class SaveMenu : UIViewController{
     }
     
     func backMain() {
+        
     }
 
 }
