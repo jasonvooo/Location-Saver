@@ -1,11 +1,20 @@
 import UIKit
+import CoreData
 
 class SaveOption: UIViewController{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
+    var sender:SaveMenu = SaveMenu()
+    var people = [NSManagedObject]()
+    
+    convenience init( sender: SaveMenu ) {
+        self.init()
+        self.sender = sender
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor.whiteColor()
         
         let carButton = createButton(screenSize.width/2-100,height: screenSize.height/6,x: 200,y: 50,title: "Car",colour: 0x34aadc,radius: 5)
@@ -57,19 +66,32 @@ class SaveOption: UIViewController{
     }
     
     func saveLocation() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Person", inManagedObjectContext:managedContext)
+        
+        let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+    
+        //person.setValue(name, forKey: "name")
+        
+        do {
+            try managedContext.save()
+            //people.append(person)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+        
         let alert = UIAlertController(title: "Saved", message: "Your location has been saved!", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: backMain))
         self.presentViewController(alert, animated: true, completion:nil)
     }
 
     func backMain(alert: UIAlertAction!){
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        for v in view.subviews{
-            v.removeFromSuperview()
-        }
-    }
-    
-    func backScreen() {
+        sender.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     

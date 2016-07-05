@@ -3,6 +3,7 @@ import MapKit
 
 class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
+    
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var mapView: MKMapView!
     var locationManager = CLLocationManager()
@@ -50,7 +51,7 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     }
     
     func displaySaveOption(){
-        let saveOption:SaveOption = SaveOption()
+        let saveOption:SaveOption = SaveOption(sender: self)
         self.presentViewController(saveOption, animated: true, completion: nil)
     }
     
