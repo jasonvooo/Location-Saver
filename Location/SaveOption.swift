@@ -5,7 +5,7 @@ class SaveOption: UIViewController{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     var sender:SaveMenu = SaveMenu()
-    var people = [NSManagedObject]()
+    var locations = [NSManagedObject]()
     
     convenience init( sender: SaveMenu ) {
         self.init()
@@ -71,18 +71,22 @@ class SaveOption: UIViewController{
         
         let managedContext = appDelegate.managedObjectContext
         
-        let entity =  NSEntityDescription.entityForName("Person", inManagedObjectContext:managedContext)
+        let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         
-        let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
     
-        //person.setValue(name, forKey: "name")
+        location.setValue("Car", forKey: "name")
+        location.setValue(15, forKey: "latitude")
+        location.setValue(18, forKey: "longitude")
+        location.setValue(NSDate(), forKey: "time")
         
         do {
             try managedContext.save()
-            //people.append(person)
+            locations.append(location)
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
+        
         
         
         let alert = UIAlertController(title: "Saved", message: "Your location has been saved!", preferredStyle: UIAlertControllerStyle.Alert)

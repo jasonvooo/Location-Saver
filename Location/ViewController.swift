@@ -1,11 +1,28 @@
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
     let screenSize: CGRect = UIScreen.mainScreen().bounds
+    var locations = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            locations = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        print(locations.count)
         
         let backgroundImage = UIImageView(frame: CGRectMake(-20, 0, screenSize.width+20, screenSize.height))
         let pin = UIImage(named: "loginn") as UIImage!
