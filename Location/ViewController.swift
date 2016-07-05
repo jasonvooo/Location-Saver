@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
     func displaySaveMenu(){
         let vc = storyboard?.instantiateViewControllerWithIdentifier("SaveMenu") as! SaveMenu
         presentViewController(vc, animated: true, completion: nil)

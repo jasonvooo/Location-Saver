@@ -1,28 +1,61 @@
 import UIKit
 
-class LoadMenu : UIViewController{
+class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
+    
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    let shift = UIApplication.sharedApplication().statusBarFrame.size.height
+    
+    var tableView: UITableView  =   UITableView()
+    let animals : [String] = ["1","2","3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.whiteColor()
 
+        tableView = UITableView(frame: CGRectMake(0, shift+44, screenSize.width-15, screenSize.height-shift-44), style: UITableViewStyle.Plain)
+        //tableView = UITableView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height), style: UITableViewStyle.Plain)
+
+        tableView.delegate      =   self
+        tableView.dataSource    =   self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(self.tableView)
+        
+        let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
+        nav.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(nav)
+        
+        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
+            , width: screenSize.width, height: 44))
+        self.view.addSubview(navBar);
+        let navItem = UINavigationItem(title: "Location Saver");
+        let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:#selector(LoadMenu.backMain))
+        navItem.leftBarButtonItem = backItem;
+        navBar.setItems([navItem], animated: false);
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return animals.count
         
     }
     
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+        let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        cell.textLabel!.text = animals [indexPath.row]
+        return cell;
     }
     
-    func createButton(width:CGFloat,height:CGFloat,x:CGFloat,y:CGFloat,title:String,colour:UInt32,radius:CGFloat)-> UIButton{
-        let button = UIButton(frame:CGRectMake(width, height, x, y))
-        button.backgroundColor = UIColorFromHex(colour)
-        button.setTitle(title, forState: UIControlState.Normal)
-        button.layer.cornerRadius = radius
-        return button
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        print(animals[indexPath.row])
+        
     }
     
-
+    func backMain() {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
