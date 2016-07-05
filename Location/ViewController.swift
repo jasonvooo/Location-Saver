@@ -11,12 +11,19 @@ class ViewController: UIViewController {
         let pin = UIImage(named: "loginn") as UIImage!
         backgroundImage.image = pin
         self.view.addSubview(backgroundImage)
+        
+        let appName = UILabel(frame: CGRectMake(screenSize.width/2 - 62, 100, 250, 50))
+        appName.text = "Laver"
+        appName.font = UIFont(name: "Arial-BoldMT", size: 45)
+        appName.textColor = UIColor.whiteColor()
+        
+        self.view.addSubview(appName)
     
-        let saveButton = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Save",colour: 0x34aadc,radius: 5)
+        let saveButton = createButton(screenSize.width/2-100,height: screenSize.height/2+100,x: 200,y: 100,title: "Save",colour: 0x34aadc,radius: 5)
         saveButton.addTarget(self, action: #selector(ViewController.displaySaveMenu), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(saveButton)
         
-        let loadButton = createButton(screenSize.width/2-50, height: screenSize.height/2, x: 100, y: 50, title: "Load", colour: 0x34aadc, radius: 5)
+        let loadButton = createButton(screenSize.width/2-100, height: screenSize.height/2-50, x: 200, y: 100, title: "Load", colour: 0x34aadc, radius: 5)
         loadButton.addTarget(self, action: #selector(ViewController.displayLoadMenu), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(loadButton)
     }
@@ -37,8 +44,8 @@ class ViewController: UIViewController {
     }
     
     func displayLoadMenu(){
-        //let loadMeu:LoadMenu = LoadMenu()
-        //self.presentViewController(loadMenu, animated: true, completion: nil)
+        let loadMenu:LoadMenu = LoadMenu()
+        self.presentViewController(loadMenu, animated: true, completion: nil)
     }
 
     

@@ -1,13 +1,18 @@
 import UIKit
 import MapKit
 
-class SaveMenu : UIViewController{
+class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     @IBOutlet weak var mapView: MKMapView!
+    var locationManager = CLLocationManager()
+    let regionRadius: CLLocationDistance = 1000
+    var initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        initMapView()
         self.view.backgroundColor = UIColor.whiteColor()
         let test = createButton(screenSize.width/2-150,height: screenSize.height - 65,x: 300,y: 50,title: "Save",colour: 0x4CD964,radius: 5)
         test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
@@ -24,8 +29,6 @@ class SaveMenu : UIViewController{
         let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:#selector(SaveMenu.backMain))
         navItem.leftBarButtonItem = backItem;
         navBar.setItems([navItem], animated: false);
-        
-        
 
     }
     //UI colour from hex
@@ -54,6 +57,43 @@ class SaveMenu : UIViewController{
     
     func backMain() {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func initMapView(){
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        self.mapView.showsUserLocation = true
+
+        /*
+        //Pin Icon
+        let pinIcon = UIImageView(frame: CGRectMake(screenSize.width/2-10, screenSize.width/2-20, 20, 20))
+        let pin = UIImage(named: "pinny") as UIImage!
+        pinIcon.image = pin
+        mapView.addSubview(pinIcon)
+         */
+
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations.last
+        
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        self.mapView.setRegion(region, animated: true)
+        
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+    {
+        print("Errors: " + error.localizedDescription)
     }
 
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49A41C401D2B79DC0015C538 /* loginn.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A41C3F1D2B79DC0015C538 /* loginn.png */; };
+		49A41C421D2B7D610015C538 /* pinny.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A41C411D2B7D610015C538 /* pinny.png */; };
 		9606AF201D2B43BC00E34F24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9606AF1F1D2B43BC00E34F24 /* AppDelegate.swift */; };
 		9606AF221D2B43BC00E34F24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9606AF211D2B43BC00E34F24 /* ViewController.swift */; };
 		9606AF251D2B43BC00E34F24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9606AF231D2B43BC00E34F24 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		49A41C3F1D2B79DC0015C538 /* loginn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginn.png; sourceTree = "<group>"; };
+		49A41C411D2B7D610015C538 /* pinny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinny.png; sourceTree = "<group>"; };
 		9606AF1C1D2B43BC00E34F24 /* Location.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Location.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9606AF1F1D2B43BC00E34F24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9606AF211D2B43BC00E34F24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				9606AF231D2B43BC00E34F24 /* Main.storyboard */,
 				9606AF291D2B43BC00E34F24 /* Assets.xcassets */,
 				49A41C3F1D2B79DC0015C538 /* loginn.png */,
+				49A41C411D2B7D610015C538 /* pinny.png */,
 				9606AF2B1D2B43BC00E34F24 /* LaunchScreen.storyboard */,
 				9606AF2E1D2B43BC00E34F24 /* Info.plist */,
 				9606AF261D2B43BC00E34F24 /* Location.xcdatamodeld */,
@@ -244,6 +247,7 @@
 			files = (
 				49A41C401D2B79DC0015C538 /* loginn.png in Resources */,
 				9606AF2D1D2B43BC00E34F24 /* LaunchScreen.storyboard in Resources */,
+				49A41C421D2B7D610015C538 /* pinny.png in Resources */,
 				9606AF2A1D2B43BC00E34F24 /* Assets.xcassets in Resources */,
 				9606AF251D2B43BC00E34F24 /* Main.storyboard in Resources */,
 			);
