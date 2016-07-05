@@ -1,8 +1,10 @@
 import UIKit
+import MapKit
 
 class SaveMenu : UIViewController{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -10,11 +12,9 @@ class SaveMenu : UIViewController{
         let test = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Save",colour: 0x34aadc,radius: 5)
         test.addTarget(self, action: #selector(SaveMenu.saveLocation), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(test)
-     
         
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.sharedApplication().statusBarFrame.size.height
-            , width: screenSize.width, height: 44))
-        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+            , width: screenSize.width, height: 20))
         self.view.addSubview(navBar);
         let navItem = UINavigationItem(title: "Location Saver");
         let backItem = UIBarButtonItem(title:"Back", style:.Plain, target:nil, action:nil)
