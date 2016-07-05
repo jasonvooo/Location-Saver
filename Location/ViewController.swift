@@ -6,6 +6,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backgroundImage = UIImageView(frame: CGRectMake(-20, 0, screenSize.width+20, screenSize.height))
+        let pin = UIImage(named: "loginn") as UIImage!
+        backgroundImage.image = pin
+        self.view.addSubview(backgroundImage)
     
         let saveButton = createButton(screenSize.width/2-50,height: screenSize.height/2+100,x: 100,y: 50,title: "Save",colour: 0x34aadc,radius: 5)
         saveButton.addTarget(self, action: #selector(ViewController.displaySaveMenu), forControlEvents: UIControlEvents.TouchUpInside)
