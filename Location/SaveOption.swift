@@ -27,15 +27,15 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Car Button
         carY = screenSize.height/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-100,h: carY,x: 200,y: 50,title: "Car",colour: 0x007AFF,radius: 5, s: #selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: carY,x: 300,y: 50,title: "Car",colour: 0x007AFF,radius: 5, s: #selector(SaveOption.saveLocation)))
         
         //Restaurant Button
         resY = screenSize.height*2/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: resY, x: 200, y: 50, title: "Restuarant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 50, title: "Restuarant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Other option
         customY = screenSize.height*3/6
-        otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-100, customY, 200, 50))
+        otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-150, customY, 300, 50))
         otherOptionButton.backgroundColor = UIColorFromHex(0x007AFF)
         otherOptionButton.layer.cornerRadius = 5
         otherOptionButton.textColor = UIColor.whiteColor()
@@ -49,8 +49,11 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Create Button
         saveY = screenSize.height*4/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: screenSize.height*4/6, x: 200, y: 50, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
+        //screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50
         
+        
+        //screenSize.width/2-100, h: screenSize.height*4/6, x: 200, y: 50,
         //Navigation bar background
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
         nav.backgroundColor = UIColor.whiteColor()
