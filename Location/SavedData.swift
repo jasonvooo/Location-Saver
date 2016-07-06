@@ -10,6 +10,7 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var latitude = Double()
     var longitude = Double()
     var date = NSDate()
+    var coordinates = CLLocationCoordinate2D()
     
     var mapView: MKMapView! = MKMapView()
     
@@ -35,7 +36,6 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         mapView.mapType = .Standard
         mapView.frame = view.frame
         mapView.delegate = self
-        var coordinates = CLLocationCoordinate2D()
         coordinates.latitude = latitude
         coordinates.longitude = longitude
         let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -57,7 +57,7 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
          */
         
         //Maps button
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50,title: "Open in Maps",colour: 0x4CD964,radius: 5, s: #selector(SaveMenu.displaySaveOption)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50,title: "Open in Maps",colour: 0x4CD964,radius: 5, s: #selector(SavedData.displayMapsApp)))
         
         //Navigation bar background
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
@@ -66,6 +66,12 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         
         //Navigation bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: name, leftTitle: "Back", leftS: #selector(SavedData.backButton)))
+    }
+    
+    func displayMapsApp(){
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinates, addressDictionary:nil))
+        mapItem.name = name
+        mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     func backButton(){

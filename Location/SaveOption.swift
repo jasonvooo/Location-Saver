@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class SaveOption: UIViewController{
+class SaveOption: UIViewController, UITextFieldDelegate{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     let shift = UIApplication.sharedApplication().statusBarFrame.size.height
@@ -9,6 +9,11 @@ class SaveOption: UIViewController{
     var locations = [NSManagedObject]()
     var latitude = Double()
     var longitude = Double()
+    var carY:CGFloat = 0.0
+    var resY:CGFloat = 0.0
+    var customY:CGFloat = 0.0
+    var saveY:CGFloat = 0.0
+    var otherOptionButton = UITextField()
     
     convenience init(sender: SaveMenu, latitude:Double, longitude:Double) {
         self.init()
@@ -21,18 +26,24 @@ class SaveOption: UIViewController{
         self.view.backgroundColor = UIColor.whiteColor()
         
         //Car Button
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-100,h: screenSize.height/6,x: 200,y: 50,title: "Car",colour: 0x34aadc,radius: 5, s: #selector(SaveOption.saveLocation)))
+        carY = screenSize.height/6
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-100,h: carY,x: 200,y: 50,title: "Car",colour: 0x34aadc,radius: 5, s: #selector(SaveOption.saveLocation)))
         
         //Restaurant Button
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: screenSize.height*2/6, x: 200, y: 50, title: "Restuarant", colour: 0x34aadc, radius: 5, s:#selector(SaveOption.saveLocation)))
+        resY = screenSize.height*2/6
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: resY, x: 200, y: 50, title: "Restuarant", colour: 0x34aadc, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Other option
-        let otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-100, screenSize.height*3/6, 200, 50))
+        customY = screenSize.height*3/6
+        otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-100, customY, 200, 50))
         otherOptionButton.backgroundColor = UIColor.blueColor()
         otherOptionButton.layer.cornerRadius = 5
         self.view.addSubview(otherOptionButton)
+        self.otherOptionButton.delegate = self
+        self.otherOptionButton.returnKeyType = .Done
         
         //Create Button
+        saveY = screenSize.height*4/6
         self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: screenSize.height*4/6, x: 200, y: 50, title: "Save", colour: 0x34aadc, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Navigation bar background
@@ -45,14 +56,29 @@ class SaveOption: UIViewController{
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Cancel", leftS: #selector(SaveOption.backButton)))
     }
     
-    func saveLocation() {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    func saveLocation(sender:UIButton) {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
     
-        location.setValue("Car", forKey: "name")
+        if(sender.frame.origin.y == carY){
+            location.setValue("Car", forKey: "name")
+        }
+        else if(sender.frame.origin.y == resY){
+            location.setValue("Restaurant", forKey: "name")
+        }
+        else if(sender.frame.origin.y == saveY){
+            location.setValue(otherOptionButton.text, forKey: "name")
+        }
+        
         location.setValue(latitude, forKey: "latitude")
         location.setValue(longitude, forKey: "longitude")
         location.setValue(NSDate(), forKey: "time")
