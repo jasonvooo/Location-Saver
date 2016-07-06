@@ -82,9 +82,6 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         let managedContext = appDelegate.managedObjectContext
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-    
-        print(carY)
-        print(sender.frame.origin.y)
         
         if(Int(sender.frame.origin.y) == Int(carY)){
             location.setValue("Car", forKey: "name")
