@@ -54,7 +54,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Save Button
         saveY = screenSize.height*0.8027
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 75, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: saveY,x: 300,y: 75, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
     
         //Navigation bar background
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
