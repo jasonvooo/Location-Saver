@@ -32,7 +32,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Restaurant Button
         resY = screenSize.height*0.3049
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 100, title: "Restuarant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 100, title: "Restaurant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Store Button
         storeY = screenSize.height*0.4395
