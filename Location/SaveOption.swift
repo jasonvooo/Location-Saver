@@ -64,6 +64,10 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Navigation bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Cancel", leftS: #selector(SaveOption.backButton), rightTitle: "", rightS: nil))
+        
+        let statusBar = UIView(frame:CGRectMake(0,0,screenSize.width, 20))
+        statusBar.backgroundColor = UIObject.UIColorFromHex(0x6DC067)
+        self.view.addSubview(statusBar)
     }
     
     
@@ -121,6 +125,10 @@ class SaveOption: UIViewController, UITextFieldDelegate{
     func backMain(alert: UIAlertAction!){
         sender.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     override func viewDidLoad() {

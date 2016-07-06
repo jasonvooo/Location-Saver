@@ -22,6 +22,8 @@ class UIObject : NSObject {
     
     static func createNavBar(w:CGFloat,h:CGFloat,x:CGFloat,y:CGFloat,title:String,leftTitle:String,leftS:Selector,rightTitle:String,rightS:Selector)-> UINavigationBar{
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: x, y: y, width: w, height: h))
+        navBar.backgroundColor = UIColorFromHex(0x6DC067)
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         let navItem = UINavigationItem(title: title);
         if(leftTitle != ""){
             let backItem = UIBarButtonItem(title:leftTitle, style:.Plain, target:nil, action:leftS)
