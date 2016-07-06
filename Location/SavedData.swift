@@ -85,6 +85,10 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialiseScreen()
