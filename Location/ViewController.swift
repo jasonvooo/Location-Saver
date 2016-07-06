@@ -4,9 +4,7 @@ class ViewController: UIViewController {
 
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func initialiseScreen(){
         //Background Image
         let backgroundImage = UIImageView(frame: CGRectMake(-20, 0, screenSize.width+20, screenSize.height))
         let pin = UIImage(named: "loginn") as UIImage!
@@ -19,7 +17,7 @@ class ViewController: UIViewController {
         appName.font = UIFont(name: "Arial-BoldMT", size: 45)
         appName.textColor = UIColor.whiteColor()
         self.view.addSubview(appName)
-    
+        
         //Save Button
         self.view.addSubview(UIObject.createButton(screenSize.width/2-100,h: screenSize.height/2+100,x: 200,y: 100,title: "Save",colour: 0x34aadc,radius: 5, s:#selector(ViewController.displaySaveMenu)))
         
@@ -30,7 +28,7 @@ class ViewController: UIViewController {
     func displaySaveMenu(){
         let vc = storyboard?.instantiateViewControllerWithIdentifier("SaveMenu") as! SaveMenu
         presentViewController(vc, animated: true, completion: nil)
-
+        //self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func displayLoadMenu(){
@@ -38,5 +36,9 @@ class ViewController: UIViewController {
         self.presentViewController(loadMenu, animated: true, completion: nil)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialiseScreen()
+    }
 }
 

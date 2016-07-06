@@ -8,9 +8,7 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var locationManager = CLLocationManager()
     let shift = UIApplication.sharedApplication().statusBarFrame.size.height
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
+    func initialiseScreen(){
         initMapView()
         self.view.backgroundColor = UIColor.whiteColor()
         
@@ -22,10 +20,8 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         nav.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(nav)
         
-        
         //Navigation bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(SaveMenu.backMain)))
-
     }
     
     func displaySaveOption(){
@@ -39,21 +35,18 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     }
     
     func initMapView(){
-        
+        //Map initialisation
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
 
-        
         //Pin Icon
         let pinIcon = UIImageView(frame: CGRectMake(screenSize.width/2, screenSize.height/2, 20, 20))
         let pin = UIImage(named: "pinny") as UIImage!
         pinIcon.image = pin
         mapView.addSubview(pinIcon)
-        
-
     }
 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
@@ -64,9 +57,13 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         self.locationManager.stopUpdatingLocation()
     }
     
-    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError){
         print("Errors: " + error.localizedDescription)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialiseScreen()
+    }
+    
 }

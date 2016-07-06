@@ -16,10 +16,8 @@ class SaveOption: UIViewController{
         self.latitude = latitude
         self.longitude = longitude
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    
+    func initialiseScreen(){
         self.view.backgroundColor = UIColor.whiteColor()
         
         //Car Button
@@ -33,7 +31,7 @@ class SaveOption: UIViewController{
         otherOptionButton.backgroundColor = UIColor.blueColor()
         otherOptionButton.layer.cornerRadius = 5
         self.view.addSubview(otherOptionButton)
-
+        
         //Create Button
         self.view.addSubview(UIObject.createButton(screenSize.width/2-100, h: screenSize.height*4/6, x: 200, y: 50, title: "Save", colour: 0x34aadc, radius: 5, s:#selector(SaveOption.saveLocation)))
         
@@ -45,7 +43,6 @@ class SaveOption: UIViewController{
         
         //Navigation bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Cancel", leftS: #selector(SaveOption.backButton)))
-
     }
     
     func saveLocation() {
@@ -56,8 +53,8 @@ class SaveOption: UIViewController{
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
     
         location.setValue("Car", forKey: "name")
-        location.setValue(15, forKey: "latitude")
-        location.setValue(18, forKey: "longitude")
+        location.setValue(latitude, forKey: "latitude")
+        location.setValue(longitude, forKey: "longitude")
         location.setValue(NSDate(), forKey: "time")
         
         do {
@@ -79,6 +76,11 @@ class SaveOption: UIViewController{
     func backMain(alert: UIAlertAction!){
         sender.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialiseScreen()
     }
     
 }
