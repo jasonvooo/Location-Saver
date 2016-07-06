@@ -28,20 +28,20 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Car Button
         carY = screenSize.height*0.1718
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: carY,x: 300,y: 100,title: "Car",colour: 0x007AFF,radius: 5, s: #selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: carY,x: 300,y: 100,title: "Car",colour: 0xd03027,radius: 5, s: #selector(SaveOption.saveLocation)))
         
         //Restaurant Button
         resY = screenSize.height*0.3049
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 100, title: "Restaurant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 100, title: "Restaurant", colour: 0x3399ff, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Store Button
         storeY = screenSize.height*0.4395
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: storeY, x: 300, y: 100, title: "Store", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: storeY, x: 300, y: 100, title: "Store", colour: 0xf05d21, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Other option
         customY = screenSize.height*0.6996
         otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-150, customY, 300, 69))
-        otherOptionButton.backgroundColor = UIObject.UIColorFromHex(0x007AFF)
+        otherOptionButton.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
         otherOptionButton.layer.cornerRadius = 5
         otherOptionButton.textColor = UIColor.whiteColor()
         //otherOptionButton.placeholder = "Other"
