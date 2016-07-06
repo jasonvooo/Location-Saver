@@ -60,6 +60,10 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         
         //Navigation bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: name, leftTitle: "Back", leftS: #selector(SavedData.backButton), rightTitle: "Delete", rightS: #selector(SavedData.deleteButton)))
+        
+        let statusBar = UIView(frame:CGRectMake(0,0,screenSize.width, 20))
+        statusBar.backgroundColor = UIObject.UIColorFromHex(0x6DC067)
+        self.view.addSubview(statusBar)
     }
     
     func displayMapsApp(){
