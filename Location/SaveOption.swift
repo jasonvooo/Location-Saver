@@ -74,14 +74,20 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
     
-        if(sender.frame.origin.y == carY){
+        print(carY)
+        print(sender.frame.origin.y)
+        
+        if(Int(sender.frame.origin.y) == Int(carY)){
             location.setValue("Car", forKey: "name")
         }
-        else if(sender.frame.origin.y == resY){
+        else if(Int(sender.frame.origin.y) == Int(resY)){
             location.setValue("Restaurant", forKey: "name")
         }
-        else if(sender.frame.origin.y == saveY){
+        else if(Int(sender.frame.origin.y) == Int(saveY)){
             location.setValue(otherOptionButton.text, forKey: "name")
+        }
+        else{
+            location.setValue("Default", forKey: "name")
         }
         
         location.setValue(latitude, forKey: "latitude")

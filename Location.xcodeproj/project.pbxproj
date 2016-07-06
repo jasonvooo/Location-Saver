@@ -23,7 +23,6 @@
 		9606AF531D2B4E2500E34F24 /* LoadMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9606AF521D2B4E2500E34F24 /* LoadMenu.swift */; };
 		9606AF551D2B780B00E34F24 /* SaveOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9606AF541D2B780B00E34F24 /* SaveOption.swift */; };
 		9606AF571D2B97B200E34F24 /* SavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9606AF561D2B97B200E34F24 /* SavedData.swift */; };
-		9686CED01D2CBE4D0069E97C /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 9686CECF1D2CBE4D0069E97C /* Home.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +65,6 @@
 		9606AF521D2B4E2500E34F24 /* LoadMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMenu.swift; sourceTree = "<group>"; };
 		9606AF541D2B780B00E34F24 /* SaveOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveOption.swift; sourceTree = "<group>"; };
 		9606AF561D2B97B200E34F24 /* SavedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedData.swift; sourceTree = "<group>"; };
-		9686CECF1D2CBE4D0069E97C /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Home.png; path = ../../../../Downloads/Home.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 				9606AF231D2B43BC00E34F24 /* Main.storyboard */,
 				9606AF291D2B43BC00E34F24 /* Assets.xcassets */,
 				49A41C451D2BEF070015C538 /* background_converted (1).png */,
-				9686CECF1D2CBE4D0069E97C /* Home.png */,
 				49A41C3F1D2B79DC0015C538 /* loginn.png */,
 				49A41C411D2B7D610015C538 /* pinny.png */,
 				9606AF2B1D2B43BC00E34F24 /* LaunchScreen.storyboard */,
@@ -264,7 +261,6 @@
 				49A41C401D2B79DC0015C538 /* loginn.png in Resources */,
 				9606AF2D1D2B43BC00E34F24 /* LaunchScreen.storyboard in Resources */,
 				49A41C421D2B7D610015C538 /* pinny.png in Resources */,
-				9686CED01D2CBE4D0069E97C /* Home.png in Resources */,
 				9606AF2A1D2B43BC00E34F24 /* Assets.xcassets in Resources */,
 				9606AF251D2B43BC00E34F24 /* Main.storyboard in Resources */,
 			);
