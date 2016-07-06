@@ -44,6 +44,11 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         
         //Navigation Bar
         self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(LoadMenu.backMain), rightTitle: "", rightS: nil));
+        
+        let statusBar = UIView(frame:CGRectMake(0,0,screenSize.width, 20))
+        statusBar.backgroundColor = UIObject.UIColorFromHex(0x6DC067)
+        self.view.addSubview(statusBar)
+
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -75,6 +80,10 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     func backMain() {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     override func viewDidLoad() {
