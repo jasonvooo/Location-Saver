@@ -8,8 +8,8 @@ class ViewController: UIViewController {
         
         /*
         //Background Image
-        let backgroundImage = UIImageView(frame: CGRectMake(-20, 0, screenSize.width+20, screenSize.height))
-        let pin = UIImage(named: "loginn") as UIImage!
+        let backgroundImage = UIImageView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+        let pin = UIImage(named: "background") as UIImage!
         backgroundImage.image = pin
         self.view.addSubview(backgroundImage)
         */
@@ -23,15 +23,13 @@ class ViewController: UIViewController {
         self.view.addSubview(appName)
         
         //Load Button
-        let load = UIObject.createButton(screenSize.width/2-100, h: screenSize.height/2-50, x: 200, y: 50, title: "Load", colour: 0x8E8E93, radius: 5, s:#selector(ViewController.displayLoadMenu))
+        let load = UIObject.createButton(screenSize.width*0.1032, h: screenSize.height*0.8327, x: screenSize.width*0.7936, y: screenSize.height*0.1121, title: "", colour: 0x6DC067, radius: 5, s:#selector(ViewController.displayLoadMenu))
         load.backgroundColor = UIColor.clearColor()
-        load.layer.borderColor = UIColor.whiteColor().CGColor
         self.view.addSubview(load)
         
         //Save Button
-        let save = UIObject.createButton(screenSize.width/2-100,h: screenSize.height/2+100,x: 200,y: 50,title: "Save",colour: 0x8E8E93,radius: 5, s:#selector(ViewController.displaySaveMenu))
+        let save = UIObject.createButton(screenSize.width*0.1032,h: screenSize.height*0.6951,x: screenSize.width*0.7936,y: screenSize.height*0.1121,title: "",colour: 0x3B5998,radius: 5, s:#selector(ViewController.displaySaveMenu))
         save.backgroundColor = UIColor.clearColor()
-        save.layer.borderColor = UIColor.whiteColor().CGColor
         self.view.addSubview(save)
         
     }
