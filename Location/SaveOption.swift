@@ -48,8 +48,8 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         
         //Create Button
-        saveY = screenSize.height*4/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
+        saveY = screenSize.height - 65
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: saveY,x: 300,y: 50, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
         //screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50
         
         
@@ -77,14 +77,20 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
     
-        if(sender.frame.origin.y == carY){
+        print(carY)
+        print(sender.frame.origin.y)
+        
+        if(Int(sender.frame.origin.y) == Int(carY)){
             location.setValue("Car", forKey: "name")
         }
-        else if(sender.frame.origin.y == resY){
+        else if(Int(sender.frame.origin.y) == Int(resY)){
             location.setValue("Restaurant", forKey: "name")
         }
-        else if(sender.frame.origin.y == saveY){
+        else if(Int(sender.frame.origin.y) == Int(saveY)){
             location.setValue(otherOptionButton.text, forKey: "name")
+        }
+        else{
+            location.setValue("Default", forKey: "name")
         }
         
         location.setValue(latitude, forKey: "latitude")
