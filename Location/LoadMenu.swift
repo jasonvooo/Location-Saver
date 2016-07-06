@@ -23,6 +23,7 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        loadData()
         self.tableView.reloadData()
     }
     
