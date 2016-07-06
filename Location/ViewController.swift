@@ -6,13 +6,14 @@ class ViewController: UIViewController {
     
     func initialiseScreen(){
         
+        /*
         //Background Image
         let backgroundImage = UIImageView(frame: CGRectMake(-20, 0, screenSize.width+20, screenSize.height))
         let pin = UIImage(named: "loginn") as UIImage!
         backgroundImage.image = pin
         self.view.addSubview(backgroundImage)
-        
-        
+        */
+        self.view.backgroundColor = UIColor.lightGrayColor()
         //Title
         let appName = UILabel(frame: CGRectMake(screenSize.width/2 - 62, 100, 250, 50))
         appName.text = "Laver"
