@@ -40,6 +40,11 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         coordinates.longitude = longitude
         let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         mapView.setRegion(region, animated: false)
+        
+        let ann = MKPointAnnotation()
+        ann.coordinate = coordinates
+        mapView.addAnnotation(ann)
+        
         self.view.addSubview(mapView)
         
         /*
