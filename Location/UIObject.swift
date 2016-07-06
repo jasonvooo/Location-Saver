@@ -20,14 +20,21 @@ class UIObject : NSObject {
         return button
     }
     
-    static func createNavBar(w:CGFloat,h:CGFloat,x:CGFloat,y:CGFloat,title:String, leftTitle:String, leftS:Selector)-> UINavigationBar{
+    static func createNavBar(w:CGFloat,h:CGFloat,x:CGFloat,y:CGFloat,title:String,leftTitle:String,leftS:Selector,rightTitle:String,rightS:Selector)-> UINavigationBar{
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: x, y: y, width: w, height: h))
         let navItem = UINavigationItem(title: title);
         if(leftTitle != ""){
             let backItem = UIBarButtonItem(title:leftTitle, style:.Plain, target:nil, action:leftS)
             navItem.leftBarButtonItem = backItem;
             navBar.setItems([navItem], animated: false);
-            
+            if(rightTitle != ""){
+                let titleColour: NSDictionary = [NSForegroundColorAttributeName: UIColor.redColor()]
+                let deleteItem = UIBarButtonItem(title:rightTitle, style:.Plain, target:nil, action:rightS)
+                deleteItem.setTitleTextAttributes(titleColour as? [String : AnyObject], forState: .Normal)
+                navItem.rightBarButtonItem = deleteItem;
+                
+            }
+            navBar.setItems([navItem], animated: false);
         }
         return navBar
     }

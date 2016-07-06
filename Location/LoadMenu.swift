@@ -21,6 +21,11 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     func initialiseScreen(){
         self.view.backgroundColor = UIColor.whiteColor()
         
@@ -37,7 +42,7 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         self.view.addSubview(nav)
         
         //Navigation Bar
-        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(LoadMenu.backMain)));
+        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(LoadMenu.backMain), rightTitle: "", rightS: nil));
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -62,8 +67,8 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         let latitude = (location.valueForKey("latitude") as? Double)!
         let longitude = (location.valueForKey("longitude") as? Double)!
         let date = (location.valueForKey("time") as? NSDate)!
-        
-        let savedData:SavedData = SavedData(name: name, latitude: latitude, longitude: longitude, date: date)
+        let index = indexPath.row as Int
+        let savedData:SavedData = SavedData(name: name, latitude: latitude, longitude: longitude, date: date, index: index)
         self.presentViewController(savedData, animated: true, completion: nil)        
     }
     

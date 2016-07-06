@@ -11,15 +11,18 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var longitude = Double()
     var date = NSDate()
     var coordinates = CLLocationCoordinate2D()
+    var locations = [NSManagedObject]()
+    var index = Int()
     
     var mapView: MKMapView! = MKMapView()
     
-    convenience init(name:String, latitude:Double, longitude:Double, date:NSDate) {
+    convenience init(name:String, latitude:Double, longitude:Double, date:NSDate, index:Int) {
         self.init()
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.date = date
+        self.index = index
     }
     
     func setVariables(name:String, latitude:Double, longitude:Double, date:NSDate){
@@ -47,15 +50,6 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         
         self.view.addSubview(mapView)
         
-        /*
-        let dateFormatter:NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        let DateInFormat:String = dateFormatter.stringFromDate(date)
-        let label4 = UILabel(frame:CGRectMake(200,400,100,100))
-        label4.text = DateInFormat
-        self.view.addSubview(label4)
-         */
-        
         //Maps button
         self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50,title: "Open in Maps",colour: 0x4CD964,radius: 5, s: #selector(SavedData.displayMapsApp)))
         
@@ -65,13 +59,26 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         self.view.addSubview(nav)
         
         //Navigation bar
-        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: name, leftTitle: "Back", leftS: #selector(SavedData.backButton)))
+        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: name, leftTitle: "Back", leftS: #selector(SavedData.backButton), rightTitle: "Delete", rightS: #selector(SavedData.deleteButton)))
     }
     
     func displayMapsApp(){
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinates, addressDictionary:nil))
         mapItem.name = name
         mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    func deleteButton(){
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "Location")
+        request.returnsObjectsAsFaults = false
+        do {
+            let incidents = try context.executeFetchRequest(request)
+            context.deleteObject(incidents[index] as! NSManagedObject)
+            try context.save()
+            backButton()
+        } catch {}
     }
     
     func backButton(){

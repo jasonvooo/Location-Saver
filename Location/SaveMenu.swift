@@ -21,7 +21,7 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         self.view.addSubview(nav)
         
         //Navigation bar
-        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(SaveMenu.backMain)))
+        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Back", leftS: #selector(SaveMenu.backMain), rightTitle: "", rightS: nil))
     }
     
     func displaySaveOption(){
