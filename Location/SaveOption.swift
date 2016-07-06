@@ -11,6 +11,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
     var longitude = Double()
     var carY:CGFloat = 0.0
     var resY:CGFloat = 0.0
+    var storeY:CGFloat = 0.0
     var customY:CGFloat = 0.0
     var saveY:CGFloat = 0.0
     var otherOptionButton = UITextField()
@@ -26,17 +27,21 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         self.view.backgroundColor = UIColor.whiteColor()
         
         //Car Button
-        carY = screenSize.height/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: carY,x: 300,y: 50,title: "Car",colour: 0x007AFF,radius: 5, s: #selector(SaveOption.saveLocation)))
+        carY = screenSize.height*0.1718
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: carY,x: 300,y: 100,title: "Car",colour: 0x007AFF,radius: 5, s: #selector(SaveOption.saveLocation)))
         
         //Restaurant Button
-        resY = screenSize.height*2/6
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 50, title: "Restuarant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        resY = screenSize.height*0.3049
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: resY, x: 300, y: 100, title: "Restuarant", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
+        
+        //Store Button
+        storeY = screenSize.height*0.4395
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: storeY, x: 300, y: 100, title: "Store", colour: 0x007AFF, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Other option
-        customY = screenSize.height*3/6
-        otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-150, customY, 300, 50))
-        otherOptionButton.backgroundColor = UIColorFromHex(0x007AFF)
+        customY = screenSize.height*0.6996
+        otherOptionButton = UITextField(frame:CGRectMake(screenSize.width/2-150, customY, 300, 69))
+        otherOptionButton.backgroundColor = UIObject.UIColorFromHex(0x007AFF)
         otherOptionButton.layer.cornerRadius = 5
         otherOptionButton.textColor = UIColor.whiteColor()
         //otherOptionButton.placeholder = "Other"
@@ -47,9 +52,9 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         self.otherOptionButton.returnKeyType = .Done
         
         
-        //Create Button
-        saveY = screenSize.height - 65
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 50, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
+        //Save Button
+        saveY = screenSize.height*0.8027
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150,h: screenSize.height - 65,x: 300,y: 75, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
     
         //Navigation bar background
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
@@ -82,6 +87,9 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         }
         else if(Int(sender.frame.origin.y) == Int(resY)){
             location.setValue("Restaurant", forKey: "name")
+        }
+        else if(Int(sender.frame.origin.y) == Int(storeY)){
+            location.setValue("Store", forKey: "name")
         }
         else if(Int(sender.frame.origin.y) == Int(saveY)){
             location.setValue(otherOptionButton.text, forKey: "name")
@@ -119,14 +127,5 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         super.viewDidLoad()
         initialiseScreen()
     }
-    
-    //UI colour from hex
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
-    }
-
     
 }

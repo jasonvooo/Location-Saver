@@ -6,21 +6,13 @@ class ViewController: UIViewController {
     
     func initialiseScreen(){
         
-        /*
+        
         //Background Image
         let backgroundImage = UIImageView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
         let pin = UIImage(named: "background") as UIImage!
         backgroundImage.image = pin
         self.view.addSubview(backgroundImage)
-        */
-        self.view.backgroundColor = UIColor.lightGrayColor()
-        //Title
-        let appName = UILabel(frame: CGRectMake(screenSize.width/2 - 62, 100, 250, 50))
-        appName.text = "Laver"
-        appName.font = UIFont(name: "Arial-BoldMT", size: 40)
-        appName.textColor = UIColorFromHex(0xD7D7D7)
-        //appName.textAlignment = .Center
-        self.view.addSubview(appName)
+ 
         
         //Load Button
         let load = UIObject.createButton(screenSize.width*0.1032, h: screenSize.height*0.8327, x: screenSize.width*0.7936, y: screenSize.height*0.1121, title: "", colour: 0x6DC067, radius: 5, s:#selector(ViewController.displayLoadMenu))
