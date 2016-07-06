@@ -36,7 +36,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         
         //Store Button
         storeY = screenSize.height*0.4395
-        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: storeY, x: 300, y: 100, title: "Store", colour: 0xf05d21, radius: 5, s:#selector(SaveOption.saveLocation)))
+        self.view.addSubview(UIObject.createButton(screenSize.width/2-150, h: storeY, x: 300, y: 100, title: "Store", colour: 0x5654a4, radius: 5, s:#selector(SaveOption.saveLocation)))
         
         //Other option
         customY = screenSize.height*0.6996
