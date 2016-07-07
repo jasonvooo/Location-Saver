@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class SaveOption: UIViewController, UITextFieldDelegate{
+class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     let shift = UIApplication.sharedApplication().statusBarFrame.size.height
@@ -20,6 +20,8 @@ class SaveOption: UIViewController, UITextFieldDelegate{
     var other = UIButton()
     var container = UIView()
     var setting:String = ""
+    var imagePicker = UIImagePickerController()
+    var imageView: UIImageView!
     
     convenience init(sender: SaveMenu, latitude:Double, longitude:Double) {
         self.init()
@@ -103,11 +105,17 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         container.addSubview(other)
         
         //Image Button
-        let imageButton = UIObject.createButton(categoryPadding, h: categoryPadding+64+70 + numOfCategories*categoryHeight + 20, x: categoryWidth-categoryPadding, y: categoryHeight*3, title: "Optional: Tap to add image", colour: 0xeeeeee, radius: 5, s:nil)
+        let imageButton = UIObject.createButton(categoryPadding, h: categoryPadding+64+70 + numOfCategories*categoryHeight + 20, x: categoryWidth-categoryPadding, y: categoryHeight*3, title: "Optional: Tap to add image", colour: 0xeeeeee, radius: 5, s:#selector(SaveOption.openImages))
         imageButton.layer.borderWidth = 1
         imageButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         imageButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         self.view.addSubview(imageButton)
+        
+        //Imageview
+        imageView = UIImageView(frame:CGRectMake(categoryPadding, categoryPadding+64+70 + numOfCategories*categoryHeight + 20, categoryWidth-categoryPadding, categoryHeight*3))
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
+        self.view.addSubview(imageView)
         
         //Save Button
         //saveY = screenSize.height*0.8027
@@ -166,28 +174,28 @@ class SaveOption: UIViewController, UITextFieldDelegate{
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            setting = "car"
+            setting = "Car"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*1-1)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            setting = "restaurant"
+            setting = "Restaurant"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*2-2)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            setting = "store"
+            setting = "Store"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*3-3)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
-            setting = "other"
+            setting = "Other"
         }
     }
     
@@ -203,6 +211,24 @@ class SaveOption: UIViewController, UITextFieldDelegate{
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+    
+    func openImages(){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            })
+        imageView.image = image
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
