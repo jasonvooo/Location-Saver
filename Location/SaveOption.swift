@@ -103,7 +103,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         container.addSubview(other)
         
         //Image Button
-        let imageButton = UIObject.createButton(categoryPadding, h: categoryPadding+64+70 + numOfCategories*categoryHeight + 20, x: categoryWidth-categoryPadding, y: categoryHeight*3, title: "Optional: Tap to add image", colour: 0xeeeeee, radius: 5, s:#selector(SaveOption.saveLocation))
+        let imageButton = UIObject.createButton(categoryPadding, h: categoryPadding+64+70 + numOfCategories*categoryHeight + 20, x: categoryWidth-categoryPadding, y: categoryHeight*3, title: "Optional: Tap to add image", colour: 0xeeeeee, radius: 5, s:nil)
         imageButton.layer.borderWidth = 1
         imageButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         imageButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
@@ -168,21 +168,21 @@ class SaveOption: UIViewController, UITextFieldDelegate{
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "car"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*1+container.frame.origin.y)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*1)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "restaurant"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*2+container.frame.origin.y)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*2)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "store"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*3+container.frame.origin.y)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*3)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
