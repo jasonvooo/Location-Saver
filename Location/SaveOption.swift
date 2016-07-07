@@ -140,6 +140,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
+        location.setValue(setting+" - "+name.text!, forKey: "name")
         location.setValue(latitude, forKey: "latitude")
         location.setValue(longitude, forKey: "longitude")
         location.setValue(NSDate(), forKey: "time")
@@ -160,31 +161,33 @@ class SaveOption: UIViewController, UITextFieldDelegate{
         print(sender.frame.origin.y)
         print(categoryHeight*0)
         
-        
-        
         if(Int(sender.frame.origin.y) == Int(categoryHeight*0)){
             car.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            setting = "car"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*1+container.frame.origin.y)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            setting = "restaurant"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*2+container.frame.origin.y)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            setting = "store"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*3+container.frame.origin.y)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
+            setting = "other"
         }
     }
     
