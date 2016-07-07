@@ -159,7 +159,7 @@ class SaveOption: UIViewController, UITextFieldDelegate{
     
     func buttonSelected(sender:UIButton){
         print(sender.frame.origin.y)
-        print(categoryHeight*0)
+        print(categoryHeight*1)
         
         if(Int(sender.frame.origin.y) == Int(categoryHeight*0)){
             car.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
@@ -168,21 +168,21 @@ class SaveOption: UIViewController, UITextFieldDelegate{
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "car"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*1)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*1-1)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "restaurant"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*2)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*2-2)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
             other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             setting = "store"
         }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*3)){
+        else if(Int(sender.frame.origin.y) == Int(categoryHeight*3-3)){
             car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
             store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
