@@ -29,13 +29,16 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     func initialiseScreen(){
         self.view.backgroundColor = UIColor.whiteColor()
+        tableView.registerClass(TableCell.self, forCellReuseIdentifier: NSStringFromClass(TableCell))
         
         //TableView
         tableView = UITableView(frame: CGRectMake(0, shift+44, screenSize.width, screenSize.height-shift-44), style: UITableViewStyle.Plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .None
+        tableView.registerClass(TableCell.self, forCellReuseIdentifier: NSStringFromClass(TableCell))
         self.view.addSubview(self.tableView)
+        
         
         //Navigation Bar Background
         let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + shift))
@@ -48,7 +51,7 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         let statusBar = UIView(frame:CGRectMake(0,0,screenSize.width, 20))
         statusBar.backgroundColor = UIObject.UIColorFromHex(0x6DC067)
         self.view.addSubview(statusBar)
-
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -57,14 +60,16 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(TableCell), forIndexPath: indexPath) as! TableCell
         let location = locations[indexPath.row] as NSManagedObject
-        cell.textLabel!.text =  location.valueForKey("name") as? String
-        return cell;
+        let name = (location.valueForKey("name") as? String)!
+        let date = (location.valueForKey("time") as? NSDate)!
+        cell.setName(name)
+        cell.setDate(date)
+        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

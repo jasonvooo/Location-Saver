@@ -47,7 +47,7 @@ class SaveMenu : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         self.mapView.showsUserLocation = true
 
         //Pin Icon
-        let pinIcon = UIImageView(frame: CGRectMake(screenSize.width/2, screenSize.height/2, 20, 20))
+        let pinIcon = UIImageView(frame: CGRectMake(screenSize.width/2-10, screenSize.height/2-10, 20, 20))
         let pin = UIImage(named: "pinny") as UIImage!
         pinIcon.image = pin
         mapView.addSubview(pinIcon)
