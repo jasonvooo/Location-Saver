@@ -118,21 +118,10 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
         self.view.addSubview(imageView)
         
         //Save Button
-        //saveY = screenSize.height*0.8027
         self.view.addSubview(UIObject.createButton(categoryPadding,h: screenSize.height-70,x: categoryWidth-categoryPadding,y: categoryHeight, title: "Save", colour: 0x4CD964, radius: 5, s:#selector(SaveOption.saveLocation)))
-    
-        //Navigation bar background
-        let nav = UILabel(frame:CGRectMake(0, 0, screenSize.width, 44 + UIApplication.sharedApplication().statusBarFrame.size.height))
-        nav.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(nav)
-        
         
         //Navigation bar
-        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44, x: 0, y: shift, title: "Location Saver", leftTitle: "Cancel", leftS: #selector(SaveOption.backButton), rightTitle: "", rightS: nil))
-        
-        let statusBar = UIView(frame:CGRectMake(0,0,screenSize.width, 20))
-        statusBar.backgroundColor = UIObject.UIColorFromHex(0x6DC067)
-        self.view.addSubview(statusBar)
+        self.view.addSubview(UIObject.createNavBar(screenSize.width, h: 44+shift, x: 0, y:0, title: "Location Saver", leftTitle: "Cancel", leftS: #selector(SaveOption.backButton), rightTitle: "", rightS: nil))
     }
     
     
@@ -148,10 +137,14 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
         let entity =  NSEntityDescription.entityForName("Location", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
-        location.setValue(setting+" - "+name.text!, forKey: "name")
+        location.setValue(name.text!, forKey: "name")
+        location.setValue(setting, forKey: "category")
         location.setValue(latitude, forKey: "latitude")
         location.setValue(longitude, forKey: "longitude")
         location.setValue(NSDate(), forKey: "time")
+        if let img = imageView.image {
+            location.setValue(UIImagePNGRepresentation(img), forKey:"image")
+        }
         
         do {
             try managedContext.save()
@@ -166,35 +159,33 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func buttonSelected(sender:UIButton){
-        print(sender.frame.origin.y)
-        print(categoryHeight*1)
         
         if(Int(sender.frame.origin.y) == Int(categoryHeight*0)){
             car.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
-            restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            restaurant.backgroundColor = UIColor.lightGrayColor()
+            store.backgroundColor = UIColor.lightGrayColor()
+            other.backgroundColor = UIColor.lightGrayColor()
             setting = "Car"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*1-1)){
-            car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            restaurant.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
-            store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            car.backgroundColor = UIColor.lightGrayColor()
+            restaurant.backgroundColor = UIObject.UIColorFromHex(0xFF3B30)
+            store.backgroundColor = UIColor.lightGrayColor()
+            other.backgroundColor = UIColor.lightGrayColor()
             setting = "Restaurant"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*2-2)){
-            car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            store.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
-            other.backgroundColor = UIObject.UIColorFromHex(0xffffff)
+            car.backgroundColor = UIColor.lightGrayColor()
+            restaurant.backgroundColor = UIColor.lightGrayColor()
+            store.backgroundColor = UIObject.UIColorFromHex(0x4CD964)
+            other.backgroundColor = UIColor.lightGrayColor()
             setting = "Store"
         }
         else if(Int(sender.frame.origin.y) == Int(categoryHeight*3-3)){
-            car.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            restaurant.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            store.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-            other.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
+            car.backgroundColor = UIColor.lightGrayColor()
+            restaurant.backgroundColor = UIColor.lightGrayColor()
+            store.backgroundColor = UIColor.lightGrayColor()
+            other.backgroundColor = UIObject.UIColorFromHex(0x898C90)
             setting = "Other"
         }
     }
@@ -215,9 +206,10 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     func openImages(){
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            //imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.sourceType = .Camera
             imagePicker.allowsEditing = false
-            
+            imagePicker.navigationBar.translucent = false
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
     }
@@ -228,7 +220,33 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
         imageView.image = image
     }
     
+    //mediaPicker is your UIImagePickerController
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        viewController.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+
+        //viewController.view.addSubview(car)
+        
+        if(imagePicker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary){
+            let button = UIBarButtonItem(title: "Camera", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SaveOption.showCamera))
+            viewController.navigationItem.leftBarButtonItem = button
+        }else{
+            
+            let titleColour: NSDictionary = [NSForegroundColorAttributeName: UIColor.blueColor()]
+            let deleteItem = UIBarButtonItem(title:"Photo Library", style:.Plain, target:nil, action:#selector(SaveOption.choosePicture))
+            deleteItem.setTitleTextAttributes(titleColour as? [String : AnyObject], forState: .Normal)
+            viewController.navigationItem.leftBarButtonItem = deleteItem;
+            viewController.navigationController?.navigationBarHidden = false
+            viewController.navigationController?.navigationBar.translucent = true
+        }
+    }
     
+    func showCamera(){
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+    }
+    
+    func choosePicture(){
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

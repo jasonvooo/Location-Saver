@@ -67,19 +67,26 @@ class LoadMenu : UIViewController, UITableViewDelegate,UITableViewDataSource {
         let location = locations[indexPath.row] as NSManagedObject
         let name = (location.valueForKey("name") as? String)!
         let date = (location.valueForKey("time") as? NSDate)!
+        let category = (location.valueForKey("category") as? String)!
         cell.setName(name)
         cell.setDate(date)
+        cell.setCategory(category)
+        if let image = location.valueForKey("image") {
+            cell.setImag(image as! NSData)
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let location = locations[indexPath.row] as NSManagedObject
         let name = (location.valueForKey("name") as? String)!
+        let category = (location.valueForKey("category") as? String)!
         let latitude = (location.valueForKey("latitude") as? Double)!
         let longitude = (location.valueForKey("longitude") as? Double)!
+        let image = (location.valueForKey("name") as? NSData)!
         let date = (location.valueForKey("time") as? NSDate)!
         let index = indexPath.row as Int
-        let savedData:SavedData = SavedData(name: name, latitude: latitude, longitude: longitude, date: date, index: index)
+        let savedData:SavedData = SavedData(name: name, latitude: latitude, longitude: longitude, date: date, index: index, category: category, image: image)
         self.presentViewController(savedData, animated: true, completion: nil)        
     }
     

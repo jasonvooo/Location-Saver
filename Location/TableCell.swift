@@ -22,19 +22,12 @@ class TableCell: UITableViewCell {
     }
     
     func setName(name:String){
-        //Name
         let titleBar = UIView(frame:CGRectMake(0,0,screenSize.width-10, screenSize.height/20))
         titleBar.backgroundColor = UIColor.whiteColor()
         let titleText = UILabel(frame:CGRectMake(20,0,screenSize.width-30,screenSize.height/20))
         titleText.text = name
         background.addSubview(titleBar)
         titleBar.addSubview(titleText)
-        
-        //Banner
-        let banner = UIView(frame:CGRectMake(0,0,15,screenSize.height/10))
-        banner.backgroundColor = UIColor.redColor()
-        banner.layer.cornerRadius = 10
-        background.addSubview(banner)
     }
     
     func setDate(date:NSDate){
@@ -46,6 +39,36 @@ class TableCell: UITableViewCell {
         dateText.font = dateText.font.fontWithSize(10)
         background.addSubview(dateBar)
         dateBar.addSubview(dateText)
+    }
+    
+    func setImag(image:NSData){
+        let img = UIImage(data: image)
+        let imageView = UIImageView(frame: CGRectMake(screenSize.width-10 - screenSize.height/10, 0, screenSize.height/10, screenSize.height/10))
+        imageView.image = img
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = UIColor.whiteColor()
+        imageView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        imageView.layer.borderWidth = 1
+        background.addSubview(imageView)
+    }
+    
+    func setCategory(category:String){
+        let banner = UIView(frame:CGRectMake(0,0,15,screenSize.height/10))
+        switch category {
+        case "Car":
+            banner.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
+        case "Restaurant":
+            banner.backgroundColor = UIObject.UIColorFromHex(0xFF3B30)
+        case "Store":
+            banner.backgroundColor = UIObject.UIColorFromHex(0x4CD964)
+        case "Other":
+            banner.backgroundColor = UIObject.UIColorFromHex(0x898C90)
+        default:
+            banner.backgroundColor = UIColor.redColor()
+        }
+        banner.layer.cornerRadius = 10
+        background.addSubview(banner)
     }
     
     required init(coder aDecoder: NSCoder) {

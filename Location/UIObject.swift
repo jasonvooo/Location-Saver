@@ -28,13 +28,11 @@ class UIObject : NSObject {
         if(leftTitle != ""){
             let backItem = UIBarButtonItem(title:leftTitle, style:.Plain, target:nil, action:leftS)
             navItem.leftBarButtonItem = backItem;
-            navBar.setItems([navItem], animated: false);
             if(rightTitle != ""){
                 let titleColour: NSDictionary = [NSForegroundColorAttributeName: UIColor.redColor()]
                 let deleteItem = UIBarButtonItem(title:rightTitle, style:.Plain, target:nil, action:rightS)
                 deleteItem.setTitleTextAttributes(titleColour as? [String : AnyObject], forState: .Normal)
                 navItem.rightBarButtonItem = deleteItem;
-                
             }
             navBar.setItems([navItem], animated: false);
         }

@@ -10,26 +10,23 @@ class SavedData: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var latitude = Double()
     var longitude = Double()
     var date = NSDate()
+    var image = NSData()
+    var category = String()
     var coordinates = CLLocationCoordinate2D()
     var locations = [NSManagedObject]()
     var index = Int()
     
     var mapView: MKMapView! = MKMapView()
     
-    convenience init(name:String, latitude:Double, longitude:Double, date:NSDate, index:Int) {
+    convenience init(name:String, latitude:Double, longitude:Double, date:NSDate, index:Int, category:String, image:NSData) {
         self.init()
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.date = date
         self.index = index
-    }
-    
-    func setVariables(name:String, latitude:Double, longitude:Double, date:NSDate){
-        self.name = name
-        self.latitude = latitude
-        self.longitude = longitude
-        self.date = date
+        self.image = image
+        self.category = category
     }
     
     func initialiseScreen(){
