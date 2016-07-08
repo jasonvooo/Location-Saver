@@ -59,10 +59,10 @@
 		9606AF291D2B43BC00E34F24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9606AF2C1D2B43BC00E34F24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9606AF2E1D2B43BC00E34F24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9606AF331D2B43BC00E34F24 /* LocationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9606AF331D2B43BC00E34F24 /* Location.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Location.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9606AF371D2B43BC00E34F24 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		9606AF391D2B43BC00E34F24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9606AF3E1D2B43BC00E34F24 /* LocationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9606AF3E1D2B43BC00E34F24 /* Location.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Location.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9606AF421D2B43BC00E34F24 /* LocationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUITests.swift; sourceTree = "<group>"; };
 		9606AF441D2B43BC00E34F24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9606AF501D2B4E1C00E34F24 /* SaveMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMenu.swift; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				9606AF1C1D2B43BC00E34F24 /* Location.app */,
-				9606AF331D2B43BC00E34F24 /* LocationTests.xctest */,
-				9606AF3E1D2B43BC00E34F24 /* LocationUITests.xctest */,
+				9606AF331D2B43BC00E34F24 /* Location.xctest */,
+				9606AF3E1D2B43BC00E34F24 /* Location.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 			);
 			name = LocationTests;
 			productName = LocationTests;
-			productReference = 9606AF331D2B43BC00E34F24 /* LocationTests.xctest */;
+			productReference = 9606AF331D2B43BC00E34F24 /* Location.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9606AF3D1D2B43BC00E34F24 /* LocationUITests */ = {
@@ -251,7 +251,7 @@
 			);
 			name = LocationUITests;
 			productName = LocationUITests;
-			productReference = 9606AF3E1D2B43BC00E34F24 /* LocationUITests.xctest */;
+			productReference = 9606AF3E1D2B43BC00E34F24 /* Location.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -492,7 +492,7 @@
 				INFOPLIST_FILE = Location/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = proj.Location;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -507,7 +507,7 @@
 				INFOPLIST_FILE = Location/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = proj.Location;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -519,7 +519,7 @@
 				INFOPLIST_FILE = LocationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = location.LocationTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Location.app/Location";
 			};
 			name = Debug;
@@ -531,7 +531,7 @@
 				INFOPLIST_FILE = LocationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = location.LocationTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Location.app/Location";
 			};
 			name = Release;
@@ -542,7 +542,7 @@
 				INFOPLIST_FILE = LocationUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = location.LocationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				TEST_TARGET_NAME = Location;
 			};
 			name = Debug;
@@ -553,7 +553,7 @@
 				INFOPLIST_FILE = LocationUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = location.LocationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Location;
 				TEST_TARGET_NAME = Location;
 			};
 			name = Release;
