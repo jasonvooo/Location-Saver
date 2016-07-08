@@ -14,14 +14,14 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     var categoryWidth = CGFloat()
     var categoryHeight = CGFloat()
     let categoryPadding:CGFloat = 30.0
-    var car = UIButton()
-    var restaurant = UIButton()
-    var store = UIButton()
-    var other = UIButton()
     var container = UIView()
     var setting:String = ""
     var imagePicker = UIImagePickerController()
     var imageView: UIImageView!
+    
+    var categories = ["Car", "Restaurant", "Store", "Other"]
+    var colours = [0x3B5998, 0xFF3B30, 0x4CD964, 0x898C90]
+    var buttons = [UIButton(), UIButton(), UIButton(), UIButton()]
     
     convenience init(sender: SaveMenu, latitude:Double, longitude:Double) {
         self.init()
@@ -43,14 +43,10 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
         self.view.addSubview(nameBox)
         
         name = UITextField(frame:CGRectMake(15,0, categoryWidth-categoryPadding-30, 40))
-        name.backgroundColor = UIObject.UIColorFromHex(0xffffff)
-        name.textColor = UIColor.blackColor()
         name.attributedPlaceholder = NSAttributedString(string:"Name: Optional", attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()])
-        name.textAlignment = .Left
         nameBox.addSubview(name)
         self.name.delegate = self
         self.name.returnKeyType = .Done
-        
         
         //Select category text
         let text = UILabel(frame:CGRectMake(categoryPadding,categoryPadding+59 + 40, categoryWidth-categoryPadding, 45))
@@ -60,50 +56,34 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
         
         //Category container
         container = UIView(frame:CGRectMake(categoryPadding,categoryPadding+64+70, categoryWidth-categoryPadding, numOfCategories*categoryHeight-3))
-        //container.backgroundColor = UIColor.redColor()
         container.layer.cornerRadius = 5
         container.layer.borderColor = UIColor.lightGrayColor().CGColor
         container.layer.borderWidth = 1
         self.view.addSubview(container)
         
-        //Car Button
-        car = UIObject.createButton(0,h: 0,x: categoryWidth-categoryPadding,y: categoryHeight,title: "Car",colour: 0xeeeeee,radius: 0, s: #selector(SaveOption.buttonSelected))
-        car.layer.borderWidth = 1
-        car.layer.borderColor = UIColor.lightGrayColor().CGColor
-        let maskPath = UIBezierPath(roundedRect: car.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSizeMake(10, 10))
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = car.bounds
-        maskLayer.path  = maskPath.CGPath
-        car.layer.mask = maskLayer
-        car.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        container.addSubview(car)
-        
-        //Restaurant Button
-        restaurant = UIObject.createButton(0, h: categoryHeight*1-1, x: categoryWidth-categoryPadding, y: categoryHeight, title: "Restaurant", colour: 0xeeeeee, radius: 0, s:#selector(SaveOption.buttonSelected))
-        restaurant.layer.borderWidth = 1
-        restaurant.layer.borderColor = UIColor.lightGrayColor().CGColor
-        restaurant.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        container.addSubview(restaurant)
+        //Category Buttons
+        for i in 0...categories.count-1 {
+            buttons[i] = UIObject.createButton(0,h: categoryHeight*CGFloat(i)-CGFloat(i)
+                ,x: categoryWidth-categoryPadding,y: categoryHeight,title: categories[i],colour: 0xeeeeee,radius: 0, s: #selector(SaveOption.buttonSelected))
+            buttons[i].layer.borderWidth = 1
+            buttons[i].layer.borderColor = UIColor.lightGrayColor().CGColor
+            buttons[i].setTitleColor(UIColor.blackColor(), forState: .Normal)
+            if(i == 0 || i == categories.count-1){
+                var maskPath:UIBezierPath
+                if i == 0 {
+                    maskPath = UIBezierPath(roundedRect: buttons[i].bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSizeMake(10, 10))
+                }
+                else {
+                    maskPath = UIBezierPath(roundedRect: buttons[i].bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSizeMake(10, 10))
+                }
+                let maskLayer = CAShapeLayer()
+                maskLayer.frame = buttons[i].bounds
+                maskLayer.path  = maskPath.CGPath
+                buttons[i].layer.mask = maskLayer
+            }
+            container.addSubview(buttons[i])
+        }
        
-        //Store Button
-        store = UIObject.createButton(0, h: categoryHeight*2-2, x: categoryWidth-categoryPadding, y: categoryHeight, title: "Store", colour: 0xeeeeee, radius: 0, s:#selector(SaveOption.buttonSelected))
-        store.layer.borderWidth = 1
-        store.layer.borderColor = UIColor.lightGrayColor().CGColor
-        store.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        container.addSubview(store)
-        
-        //Other option
-        other = UIObject.createButton(0, h: categoryHeight*3-3, x: categoryWidth-categoryPadding, y: categoryHeight, title: "Other", colour: 0xeeeeee, radius: 0, s:#selector(SaveOption.buttonSelected))
-        other.layer.borderWidth = 1
-        other.layer.borderColor = UIColor.lightGrayColor().CGColor
-        let maskPath2 = UIBezierPath(roundedRect: other.bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSizeMake(5, 5))
-        let maskLayer2 = CAShapeLayer()
-        maskLayer2.frame = other.bounds
-        maskLayer2.path  = maskPath2.CGPath
-        other.layer.mask = maskLayer2
-        other.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        container.addSubview(other)
-        
         //Image Button
         let imageButton = UIObject.createButton(categoryPadding, h: categoryPadding+64+70 + numOfCategories*categoryHeight + 20, x: categoryWidth-categoryPadding, y: categoryHeight*3, title: "Optional: Tap to add image", colour: 0xeeeeee, radius: 5, s:#selector(SaveOption.openImages))
         imageButton.layer.borderWidth = 1
@@ -159,34 +139,16 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func buttonSelected(sender:UIButton){
-        
-        if(Int(sender.frame.origin.y) == Int(categoryHeight*0)){
-            car.backgroundColor = UIObject.UIColorFromHex(0x3B5998)
-            restaurant.backgroundColor = UIColor.lightGrayColor()
-            store.backgroundColor = UIColor.lightGrayColor()
-            other.backgroundColor = UIColor.lightGrayColor()
-            setting = "Car"
-        }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*1-1)){
-            car.backgroundColor = UIColor.lightGrayColor()
-            restaurant.backgroundColor = UIObject.UIColorFromHex(0xFF3B30)
-            store.backgroundColor = UIColor.lightGrayColor()
-            other.backgroundColor = UIColor.lightGrayColor()
-            setting = "Restaurant"
-        }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*2-2)){
-            car.backgroundColor = UIColor.lightGrayColor()
-            restaurant.backgroundColor = UIColor.lightGrayColor()
-            store.backgroundColor = UIObject.UIColorFromHex(0x4CD964)
-            other.backgroundColor = UIColor.lightGrayColor()
-            setting = "Store"
-        }
-        else if(Int(sender.frame.origin.y) == Int(categoryHeight*3-3)){
-            car.backgroundColor = UIColor.lightGrayColor()
-            restaurant.backgroundColor = UIColor.lightGrayColor()
-            store.backgroundColor = UIColor.lightGrayColor()
-            other.backgroundColor = UIObject.UIColorFromHex(0x898C90)
-            setting = "Other"
+        for i in 0...categories.count-1{
+            if(Int(sender.frame.origin.y) == Int(categoryHeight*CGFloat(i)-CGFloat(i))){
+                for j in 0...categories.count-1 {
+                    if i == j {
+                        buttons[j].backgroundColor = UIObject.UIColorFromHex(UInt32(colours[i]))
+                    }
+                    else { buttons[j].backgroundColor = UIObject.UIColorFromHex(0xeeeeee) }
+                }
+                setting = categories[i]
+            }
         }
     }
     
@@ -206,7 +168,6 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     func openImages(){
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
-            //imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
             imagePicker.sourceType = .Camera
             imagePicker.allowsEditing = false
             imagePicker.navigationBar.translucent = false
@@ -215,28 +176,18 @@ class SaveOption: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            })
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in })
         imageView.image = image
     }
     
-    //mediaPicker is your UIImagePickerController
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         viewController.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
-
-        //viewController.view.addSubview(car)
-        
         if(imagePicker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary){
             let button = UIBarButtonItem(title: "Camera", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SaveOption.showCamera))
             viewController.navigationItem.leftBarButtonItem = button
         }else{
-            
-            let titleColour: NSDictionary = [NSForegroundColorAttributeName: UIColor.blueColor()]
-            let deleteItem = UIBarButtonItem(title:"Photo Library", style:.Plain, target:nil, action:#selector(SaveOption.choosePicture))
-            deleteItem.setTitleTextAttributes(titleColour as? [String : AnyObject], forState: .Normal)
-            viewController.navigationItem.leftBarButtonItem = deleteItem;
-            viewController.navigationController?.navigationBarHidden = false
-            viewController.navigationController?.navigationBar.translucent = true
+            let button = UIBarButtonItem(title: "Photo Library", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SaveOption.choosePicture))
+            viewController.navigationItem.leftBarButtonItem = button
         }
     }
     
